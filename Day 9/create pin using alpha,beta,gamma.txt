@@ -1,0 +1,61 @@
+import java.util.*;
+public class Main
+{
+  public static int findMobilePin(String input1, String input2) {
+      char inputA[]=input1.toLowerCase().toCharArray();
+	    char inputB[]=input2.toLowerCase().toCharArray();
+	    boolean common=false;
+	    int uniqueA=0;
+	    int uniqueB=0;
+	    for(int i=0;i<inputA.length;i++) {
+	        boolean flag=true;
+	        for(int j=0;j<inputB.length;j++) {
+	            if(inputA[i]==inputB[j]) {
+	                common=true;
+	                flag=false;
+	            }
+	        }
+	        int count=0;
+	        for(int j=0;j<inputA.length;j++) {
+	            if(inputA[i]==inputA[j]) {
+	                count++;
+	            }
+	        }
+	        if(flag && count==1) {
+	            uniqueA+=inputA[i]-96;
+	        }
+	    }
+	    for(int i=0;i<inputB.length;i++) {
+	        boolean flag=true;
+	        for(int j=0;j<inputA.length;j++) {
+	            if(inputB[i]==inputA[j]) {
+	                common=true;
+	                flag=false;
+	            }
+	        }
+	        int count=0;
+	        for(int j=0;j<inputB.length;j++) {
+	            if(inputB[i]==inputB[j]) {
+	                count++;
+	            }
+	        }
+	        if(flag && count==1) {
+	            uniqueB+=inputB[i]-96;
+	        }
+	    }
+	    if(common) {
+	      return Integer.parseInt(1+""+uniqueA+""+uniqueB);
+	    }
+	    else {
+	      return Integer.parseInt(uniqueA+""+uniqueB);
+	    }
+  }
+  
+	public static void main(String[] args) {
+	    Scanner sc=new Scanner(System.in);
+	    String input1=sc.nextLine();
+	    String input2=sc.nextLine();
+	    int result=findMobilePin(input1, input2);
+	    System.out.println(result);
+	}
+}
